@@ -2,16 +2,29 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 
 class StreamCreate extends React.Component {
-  renderInput({ input, label } /* (formProps) */) {
+  renderError({ touched, error }) {
+    if (touched && error) {
+      return (
+        <div className="ui error message">
+          <div className="header">{error}</div>
+        </div>
+      );
+    }
+  }
+
+  renderInput = ({ input, label, meta } /* (formProps) */) => {
     // console.log(formProps);
     // <input {...formProps.input} />;
+    // console.log(meta);
+
     return (
       <div className="field">
         <label>{label}</label>
         <input {...input} />
+        {this.renderError(meta)}
       </div>
     );
-  }
+  };
 
   onSubmit(formValues /*event*/) {
     // redux form will automatically call preventDefault method for us
@@ -59,5 +72,6 @@ const validate = formValues => {
 };
 
 export default reduxForm({
-  form: "streamCreate"
+  form: "streamCreate",
+  validate: validate
 })(StreamCreate);
