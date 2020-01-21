@@ -17,8 +17,10 @@ class StreamCreate extends React.Component {
     // <input {...formProps.input} />;
     // console.log(meta);
 
+    const className = `field ${meta.touched && meta.error ? "error" : ""}`;
+
     return (
-      <div className="field">
+      <div className={className}>
         <label>{label}</label>
         <input {...input} />
         {this.renderError(meta)}
@@ -36,7 +38,7 @@ class StreamCreate extends React.Component {
     // console.log(this.props);
     return (
       <form
-        className="ui form"
+        className="ui form error"
         onSubmit={this.props.handleSubmit(this.onSubmit)}
       >
         {/* if you don't add "component" property, it will show an error on the page */}
