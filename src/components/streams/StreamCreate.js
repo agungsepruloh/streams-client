@@ -13,10 +13,19 @@ class StreamCreate extends React.Component {
     );
   }
 
+  onSubmit(formValues /*event*/) {
+    // redux form will automatically call preventDefault method for us
+    // event.preventDefault();
+    console.log(formValues);
+  }
+
   render() {
     // console.log(this.props);
     return (
-      <form className="ui form">
+      <form
+        className="ui form"
+        onSubmit={this.props.handleSubmit(this.onSubmit)}
+      >
         {/* if you don't add "component" property, it will show an error on the page */}
         <Field
           name="title"
@@ -28,6 +37,8 @@ class StreamCreate extends React.Component {
           component={this.renderInput}
           label="Enter Description: "
         />
+
+        <button className="ui button primary">Submit</button>
       </form>
     );
   }
