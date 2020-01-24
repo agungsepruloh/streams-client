@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import _ from "lodash";
 import { fetchStream, editStream } from "../../actions";
 import StreamForm from "./StreamForm";
 
@@ -24,7 +25,8 @@ class StreamEdit extends React.Component {
         {/* initialValues is a special properties added by redux form in streamForm */}
         {/* initialValues will automatically connected or paired beetween field's name and passed value */}
         <StreamForm
-          initialValues={this.props.stream}
+          // only pass title and description, no longer id and user id
+          initialValues={_.pick(this.props.stream, "title", "description")}
           onSubmit={this.onSubmit}
         />
       </div>
